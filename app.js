@@ -32,6 +32,9 @@ const valuesChosed = []
 
 
 btnPlay.addEventListener("click", main)
+newGameBtn.addEventListener("click", () => {
+    document.location.reload()
+})
 
 // Função principal, recebe o valor e coloca na tela, e cria uma lista de já sorteados, remove o item sorteado!
 
@@ -41,19 +44,26 @@ function main() {
 
     valuesChosed.push(myValue)
     document.querySelector(".chosed-letters").innerHTML = myValue
-    document.querySelector(".selected-values").innerHTML = valuesChosed  
+    
 
     if(alphabetSyllabic.length > 0) {
         alphabetSyllabic.map((value, index) => {
             if(value === myValue) {
-                alphabetSyllabic.splice(index, 1);
+                alphabetSyllabic.splice(index, 1); 
             }
         })
     } else {
-        document.querySelector(".chosed-letters").innerHTML = 'Todos os Itens Sorteados!'
+        newGameBtn.classList.remove('hide')
+        btnPlay.classList.add('hide')
     }
 
+    //Gerar uma li para cada item da Array de itens sorteados
+    
+    const li = document.createElement('li')
+    li.innerHTML = myValue
+    document.querySelector(".selected-values").appendChild(li)
 
+    
 }
 
 
